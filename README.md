@@ -3,7 +3,7 @@
 [![NPM version](https://img.shields.io/npm/v/react-viewer-soda.svg?style=flat)](https://npmjs.org/package/react-viewer-soda)
 [![NPM downloads](https://img.shields.io/npm/dm/react-viewer-soda)](https://npmjs.org/package/react-viewer-soda)
 
-🥤 [viewerjs](https://npmjs.org/package/viewerjs) component for react
+🥤 [viewerjs](https://npmjs.org/package/viewerjs) component for react. Automatically detect changes in internal images.
 
 ## Usage
 
@@ -55,6 +55,9 @@ export interface ImageGroupProps extends HTMLAttributes<HTMLDivElement> {
     filterMode?: "exclude" | "include"
     /** options for viewer */
     options?: ViewerOptions
+    /** Whether to automatically detect changes in the internal images.
+     * The default value is true. */
+    autoUpdate?: boolean
 }
 ```
 
@@ -87,27 +90,9 @@ export default App
     <img src="small.jpg" data-rvs-url="large.jpg" />    
     ```
 
-2. The acquisition of the `viewer` ref instance may have some delay, and directly reading it in `useEffect` might result in `null`. However, it should work fine in subsequent event calls.
+2. `ImageGroup` has an `autoUpdate` property with a default value of `true`. When enabled, it detects changes in the internal images and automatically calls `viewer.update`. If your `img` elements are not going to change, you can set it to `false`. Only these changes will be detected:
 
-    ```typescript
-    import { FC } from "react"
-    import { Image } from "react-viewer-soda"
-    import Viewer from "viewerjs" 
+    1. The addition or deletion of `img` elements.
+    2. The `data-rvs` and `data-no-rvs` attributes of `img` elements.
 
-    const App: FC = () => {
-        const viewer = useRef<Viewer>(null)
-
-        useEffect(() => {
-            // it may be 'null'
-            console.log(viewer.current)
-        }, [])
-        
-        return (
-            <div>
-                <Image viewer={viewer} src="https://images.unsplash.com/photo-1608037521244-f1c6c7635194" width={640} />
-            </div>
-        )
-    }
-
-    export default App
-    ```
+    If your `img` elements will only change the `src` or `data-rvs-url` attributes, there is no need to enable `autoUpdate`.
