@@ -95,4 +95,4 @@ export default App
     1. The addition or deletion of `img` elements.
     2. The `data-rvs` and `data-no-rvs` attributes of `img` elements.
 
-    If your `img` elements will only change the `src` or `data-rvs-url` attributes, there is no need to enable `autoUpdate`.
+    If your `img` elements will only change attributes other than `data-rvs` and `data-no-rvs`, such as `src` or `data-rvs-url`, there is no need to enable `autoUpdate`.

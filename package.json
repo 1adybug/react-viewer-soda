@@ -10,7 +10,13 @@
         "build:deps": "father prebundle",
         "prepublishOnly": "father doctor && npm run build"
     },
-    "keywords": [],
+    "keywords": [
+        "viewerjs",
+        "react-viewer",
+        "react-viewerjs",
+        "react-viewer-soda",
+        "react"
+    ],
     "authors": [],
     "license": "MIT",
     "files": [
