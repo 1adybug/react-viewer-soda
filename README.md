@@ -74,6 +74,8 @@ const App: FC = () => {
     return (
         <ImageGroup viewer={viewer}>
             <img src="https://w.wallhaven.cc/full/4o/wallhaven-4oggo9.jpg" width={640} />
+            <img src="https://w.wallhaven.cc/full/nr/wallhaven-nrz77q.jpg" width={640} />
+            {/* The image below will not be previewed */}
             <img data-no-rvs src="https://w.wallhaven.cc/full/4d/wallhaven-4d666l.jpg" width={640} />
         </ImageGroup>
     )
