@@ -1,5 +1,6 @@
 import { ForwardedRef, HTMLAttributes, ImgHTMLAttributes, forwardRef, useEffect, useImperativeHandle, useState } from "react"
 import Viewer from "viewerjs"
+import "viewerjs/dist/viewer.css"
 
 export interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
     viewer?: ForwardedRef<Viewer>
