@@ -1,3 +1,4 @@
+import * as React from "react"
 import { ForwardedRef, HTMLAttributes, ImgHTMLAttributes, forwardRef, useEffect, useImperativeHandle, useState } from "react"
 import Viewer from "viewerjs"
 

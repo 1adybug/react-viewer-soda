@@ -1,9 +1,9 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "declaration": true,
-    "skipLibCheck": true,
-    "baseUrl": "./",
-    "jsx": "preserve"
-  }
+    "compilerOptions": {
+        "strict": true,
+        "declaration": true,
+        "skipLibCheck": true,
+        "baseUrl": "./",
+        "jsx": "react"
+    }
 }
