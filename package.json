@@ -1,0 +1,32 @@
+{
+    "name": "react-viewer-soda",
+    "version": "0.0.1",
+    "description": "",
+    "main": "dist/cjs/index.js",
+    "module": "dist/esm/index.js",
+    "scripts": {
+        "dev": "father dev",
+        "build": "father build",
+        "build:deps": "father prebundle",
+        "prepublishOnly": "father doctor && npm run build"
+    },
+    "keywords": [],
+    "authors": [],
+    "license": "MIT",
+    "files": [
+        "dist",
+        "compiled",
+        "src"
+    ],
+    "publishConfig": {
+        "access": "public"
+    },
+    "devDependencies": {
+        "@types/react": "^18.2.45",
+        "father": "^4.3.8"
+    },
+    "dependencies": {
+        "react": "^18.2.0",
+        "viewerjs": "^1.11.6"
+    }
+}
