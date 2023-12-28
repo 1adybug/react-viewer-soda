@@ -2,6 +2,8 @@ import { ForwardedRef, HTMLAttributes, ImgHTMLAttributes, forwardRef, useEffect,
 import Viewer from "viewerjs"
 import "viewerjs/dist/viewer.css"
 
+export { Viewer }
+
 function getPreviewUrl(image: HTMLImageElement) {
     const url = image.getAttribute("data-rvs-url")
     if (typeof url === "string" && !!url.trim()) return url
