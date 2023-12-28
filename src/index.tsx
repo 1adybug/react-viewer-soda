@@ -15,8 +15,15 @@ function booleanAttribute(ele: HTMLElement, attribute: string) {
     return !(attr === null || attr === "false")
 }
 
+function isImageOrHasImage(ele: any) {
+    if (!(ele instanceof HTMLElement)) return false
+    if (ele instanceof HTMLImageElement) return true
+    if (ele.getElementsByTagName("img")[0]) return true
+    return false
+}
+
 function ifMutationRecordIsImage(record: MutationRecord) {
-    return (record.type === "attributes" && record.target instanceof HTMLImageElement) || (record.type === "childList" && (Array.from(record.addedNodes).some(ele => ele instanceof HTMLImageElement) || Array.from(record.removedNodes).some(ele => ele instanceof HTMLImageElement)))
+    return (record.type === "attributes" && record.target instanceof HTMLImageElement) || (record.type === "childList" && (Array.from(record.addedNodes).some(isImageOrHasImage) || Array.from(record.removedNodes).some(isImageOrHasImage)))
 }
 
 function setRef<T>(ref: ForwardedRef<T>, value: T) {
