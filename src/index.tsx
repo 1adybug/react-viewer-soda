@@ -17,6 +17,11 @@ function ifMutationRecordIsImage(record: MutationRecord) {
     return (record.type === "attributes" && record.target instanceof HTMLImageElement) || (record.type === "childList" && (Array.from(record.addedNodes).some(ele => ele instanceof HTMLImageElement) || Array.from(record.removedNodes).some(ele => ele instanceof HTMLImageElement)))
 }
 
+function setRef<T>(ref: ForwardedRef<T>, value: T) {
+    if (typeof ref === "function") ref(value)
+    else if (ref) ref.current = value
+}
+
 export type ViewerOptions = Viewer.Options
 
 export interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
@@ -38,6 +43,7 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
     useEffect(() => {
         options.url ??= getPreviewUrl
         viewer.current = new Viewer(image.current!, options)
+        if (viewerRef) setRef(viewerRef, viewer.current!)
         return () => {
             viewer.current!.destroy()
         }
@@ -65,9 +71,7 @@ export const ImageGroup = forwardRef<HTMLDivElement, ImageGroupProps>((props, re
     const { viewer: viewerRef, options: originalOptions, filterMode, autoUpdate = true, ...others } = props
     const options = { ...originalOptions }
     const { filter } = options
-    options.filter = (image: HTMLImageElement) => {
-        console.log(image.getAttribute("data-no-rvs"))
-        console.log(typeof image.getAttribute("data-no-rvs"))
+    options.filter = function (image: HTMLImageElement) {
         return !booleanAttribute(image, "data-rvs-image") && ((filterMode === "include" && booleanAttribute(image, "data-rvs")) || (filterMode !== "include" && !booleanAttribute(image, "data-no-rvs"))) && (!filter || filter(image))
     }
 
@@ -80,6 +84,7 @@ export const ImageGroup = forwardRef<HTMLDivElement, ImageGroupProps>((props, re
     useEffect(() => {
         options.url ??= getPreviewUrl
         viewer.current = new Viewer(div.current!, options)
+        if (viewerRef) setRef(viewerRef, viewer.current!)
         return () => {
             viewer.current!.destroy()
         }
